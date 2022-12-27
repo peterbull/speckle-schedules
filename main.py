@@ -96,6 +96,7 @@ def get_parameter_by_name(element, parameter_name, dict):
     
     return dict
 
+# Loop through each object in selected_category
 with data:
     # This will be output data
     result_data = []

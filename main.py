@@ -73,3 +73,36 @@ def get_parameter_names(commit_data, selected_category):
         )
     parameter_names = sorted(parameter_names)
     return parameter_names
+
+# Parameter selection input
+# multi-select is included to prevent rerunning on new parameter selection
+with input:
+    form = st.form("parameter input")
+    with form:
+        selected_parameters = st.multiselect(
+            "Select Parameters", get_parameter_names(commit_data, selected_category)
+        )
+        run_button = st.form_submit_button("RUN")
+
+# Objects from selected category
+category_elements = commit_data[selected_category]
+
+# Get parameter value from parameter name
+def get_parameter_by_name(element, parameter_name, dict):
+    for parameter in parameters:
+        key = element["parameters"][parameter]["name"]
+        if key == parameter_name:
+            dict[key] = element["parameters"][parameter]["value"]
+    
+    return dict
+
+with data:
+    # This will be output data
+    result_data = []
+    # Run only when the run_button is clicked
+    if run_button:
+        for element in category_elements:
+            dict = {}
+            for s_param in selected_parameters:
+                get_parameter_by_name(element, s_param, dict)
+            result_data.append(dict)

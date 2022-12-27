@@ -52,8 +52,11 @@ obj_id = commit.referencedObject
 # receive objects from commit
 commit_data = operations.receive(obj_id, transport)
 
-#Category dropdown
+# Category dropdown
 with input:
     selected_category = st.selectbox(
         "Select Category", commit_data.get_dynamic_member_names()
     )
+
+# Parameters
+parameters = commit_data[selected_category][0]["parameters"].get_dynamic_memeber_names()

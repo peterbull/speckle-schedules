@@ -51,3 +51,9 @@ commit = client.commit.get(wrapper.stream_id, wrapper.commit_id)
 obj_id = commit.referencedObject
 # receive objects from commit
 commit_data = operations.receive(obj_id, transport)
+
+#Category dropdown
+with input:
+    selected_category = st.selectbox(
+        "Select Category", commit_data.get_dynamic_member_names()
+    )

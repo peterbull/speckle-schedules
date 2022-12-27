@@ -33,7 +33,7 @@ with input:
     st.subheader("Inputs")
     commit_url = st.text_input(
         "Commit URL",
-        "<https://speckle.xyz/streams/71504ff93d/commits/9c9b8620e3>",
+        "https://speckle.xyz/streams/e6c04f6c1c/commits/c230834154",
     )
 
 # Wrapper
@@ -65,7 +65,7 @@ with input:
 def get_parameter_names(commit_data, selected_category):
     parameters = commit_data[selected_category][0][
         "parameters"
-    ].get_dynamic_memeber_names()
+    ].get_dynamic_member_names()
     parameter_names = []
     for parameter in parameters:
         parameter_names.append(
@@ -111,4 +111,12 @@ with data:
     result_DF = pd.DataFrame.from_dict(result_data)
     # Show Data
     st.dataframe(result_DF)
-
+    # DataFrame to CSV
+    result_CSV = result_DF.to_csv().encode("utf-8")
+        # Download button
+    st.download_button(
+                "Download CSV",
+                result_CSV,
+                f"{wrapper.commit_id}.csv",
+                mime="text/csv",
+    )

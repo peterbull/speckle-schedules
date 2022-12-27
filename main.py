@@ -107,3 +107,8 @@ with data:
             for s_param in selected_parameters:
                 get_parameter_by_name(element, s_param, dict)
             result_data.append(dict)
+    # Convert result_data to Pandas DataFrame
+    result_DF = pd.DataFrame.from_dict(result_data)
+    # Show Data
+    st.dataframe(result_DF)
+

@@ -58,5 +58,18 @@ with input:
         "Select Category", commit_data.get_dynamic_member_names()
     )
 
-# Parameters
-parameters = commit_data[selected_category][0]["parameters"].get_dynamic_memeber_names()
+# # Parameters
+# parameters = commit_data[selected_category][0]["parameters"].get_dynamic_memeber_names()
+
+# Get Parameter Names
+def get_parameter_names(commit_data, selected_category):
+    parameters = commit_data[selected_category][0][
+        "parameters"
+    ].get_dynamic_memeber_names()
+    parameter_names = []
+    for parameter in parameters:
+        parameter_names.append(
+            commit_data[selected_category][0]["parameters"][parameter]["name"]
+        )
+    parameter_names = sorted(parameter_names)
+    return parameter_names

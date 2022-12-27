@@ -89,6 +89,7 @@ category_elements = commit_data[selected_category]
 
 # Get parameter value from parameter name
 def get_parameter_by_name(element, parameter_name, dict):
+    parameters = element["parameters"].get_dynamic_member_names()
     for parameter in parameters:
         key = element["parameters"][parameter]["name"]
         if key == parameter_name:
